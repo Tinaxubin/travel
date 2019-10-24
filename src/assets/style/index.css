@@ -1,0 +1,2 @@
+@import 'reset.css'; /* 解决不同型号手机初始化页面样式不同 */
+@import 'border.css'; /* 解决不同分辨率手机边框不同 */
