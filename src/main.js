@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './assets/style/index.css'
+import 'style/index.css'
 // 解决移动端点击延迟问题
 import fastclick from 'fastclick'
 
