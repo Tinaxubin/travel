@@ -2,12 +2,10 @@
   <div class="swiper">
     <swiper :options="swiperOption">
       <!-- slides -->
-      <swiper-slide>
-        <img class="swiper-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572021318012&di=072f59b39902993a041624aeff868fe9&imgtype=0&src=http%3A%2F%2Fp4-q.mafengwo.net%2Fs9%2FM00%2FBC%2F91%2FwKgBs1b7e9SANgXsADNR-a5p1tw97.jpeg"/>
+      <swiper-slide v-for="item in swiperList" :key="item.id">
+        <img class="swiper-img" :src="item.url" />
       </swiper-slide>
-      <swiper-slide>
-        <img class="swiper-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572021497104&di=152bcbb802e0ceae4dfdd698504d9051&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2055447958%2C3298526593%26fm%3D214%26gp%3D0.jpg"/>
-      </swiper-slide>
+      <!-- 滚动条下面的几个小点 -->
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>
       <!-- 左右箭头 -->
@@ -20,22 +18,40 @@
 </template>
 
 <script>
-  export default {
-    name: "homeSwiper",
-    data() {
-      return{
-        swiperOption: {}
-      }
+export default {
+  name: 'homeSwiper',
+  data () {
+    return {
+      swiperOption: {
+        pagination: '.swiper-pagination', // 使用小圆点分页
+        loop: true// 支持无缝衔接
+      },
+      swiperList: [
+        {
+          id: '001',
+          url: 'http://img1.qunarzz.com/piao/fusion/1803/98/0a2e0bd8eb0c0802.png_750x200_0a34d4a8.png'
+        },
+        {
+          id: '002',
+          url: 'http://img1.qunarzz.com/piao/fusion/1809/3e/52e1824f1ace7202.jpg_750x200_ac90db3f.jpg'
+        }
+      ]
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
+//   加上scoped使得style的样式只在当前页面中有效,
+//   而swiper是引入到了当前页面,但是swiper-slide还是其他页面内容
+//   使用>>>实现样式穿透,使得swiper下组件只要出现了swiper-pagination-bullet-active这个样式,就采取相应效果
+  .swiper >>> .swiper-pagination-bullet-active
+    background: #fff!important;
   .swiper
+    overflow: hidden;
     width: 100%;
     height: 0;
-    overflow: hidden;
-    padding-bottom: 31.25%;
+    padding-bottom: 26.67%;
     background-color: #ccc;
     .swiper-img
       width: 100%;
